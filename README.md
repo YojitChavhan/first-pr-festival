@@ -2,6 +2,8 @@
 
 Live roster for **First PR Festival : Intro to Github and Open Source**.
 
+**Live site:** https://first-pr-festival.vercel.app
+
 Merge a Pull Request → Vercel rebuilds → your Spider-ID Card appears on the site.
 No database. Just JSON files and Git.
 
@@ -123,8 +125,8 @@ optional — a student can stop at Chapter 9 with a complete, working PR.
 
 **⚠️ Do not merge PRs before students reach Chapter 9 (or 10).** A merged PR
 is closed and cannot reopen — if it's already merged, the afternoon's push has
-nowhere to land and that student's work never reaches the roster. See
-`RUNBOOK.md`.
+nowhere to land and that student's work never reaches the roster. Merge everything
+in one pass at the end with `scripts/merge-all-prs.sh`.
 
 ### Engine notes
 
@@ -149,10 +151,10 @@ than hardcoding its own copy.
 ## 🔒 Security model
 
 This repo hosts the live site **and** accepts ~100 public Pull Requests into
-the same tree. See [`SECURITY.md`](SECURITY.md) for the full model: the
-sandboxed-iframe rendering of student HTML, the CI scope guard that rejects a
-PR touching anything outside the author's own `spider-society/` file, and the
-branch-protection setup you must turn on before the event.
+the same tree. The model has three parts: student HTML is rendered in a sandboxed iframe with
+scripts disabled, a CI scope guard (`scripts/check-pr-scope.mjs`) rejects a PR
+that touches anything outside the author's own `spider-society/` file, and `main`
+should have branch protection turned on before the event.
 
 ## 🗓️ Running the event (11:00–16:00)
 
@@ -161,7 +163,7 @@ branch-protection setup you must turn on before the event.
 | 11:00–11:20 | Story hook, demo the game on the projector |
 | 11:20–11:50 | **Chapter 0 gate** — nobody moves on until `git --version` answers |
 | 11:50–12:50 | Act I (Chapters 1–5) |
-| 12:50–13:15 | **Open-PR count-up on the projector** — not a merge, see `RUNBOOK.md` |
+| 12:50–13:15 | **Open-PR count-up on the projector** — not a merge; PRs stay open until the one merge pass |
 | 13:15–14:00 | Lunch — PRs stay open |
 | 14:00–14:15 | Peer review warm-up — review the PR of the person beside you |
 | 14:15–15:15 | Act II (Chapters 6–9), Chapter 10 bonus round for early finishers |
@@ -173,9 +175,6 @@ Realistic completion for a true beginner: **~40 min** with a prepared laptop,
 **~1h50** from zero. Chapter 10 adds only a few minutes and needs zero new
 explanation — it's the same three commands as Chapters 3–5.
 
-See [`EVENT_FLOW.md`](EVENT_FLOW.md) for the minute-by-minute breakdown of
-exactly what happens on the website vs. VS Code vs. the terminal vs. GitHub.com,
-for every single chapter.
 
 ## 🧑‍💻 Run it locally
 
