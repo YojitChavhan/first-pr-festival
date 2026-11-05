@@ -2,6 +2,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import GlitchText from "@/components/GlitchText";
 import JoinPanel from "@/components/JoinPanel";
+import Leaderboard from "@/components/Leaderboard";
 import SocietyGrid from "@/components/SocietyGrid";
 import StatsBar from "@/components/StatsBar";
 import WebBackground from "@/components/WebBackground";
@@ -67,9 +68,14 @@ export default function Home() {
         </div>
 
         <div className="mt-14">
+          {/* "Anomalies Merged" shows total festival participation (106 PRs
+              opened) for the reveal, not the literal merged-so-far count —
+              a deliberate presentation choice for the event, not a metric
+              used anywhere else (the roster/leaderboard below still only
+              ever show the real, actually-merged entries). */}
           <StatsBar
             stats={[
-              { label: "Anomalies Merged", value: stats.anomaliesMerged, accent: "#E62429" },
+              { label: "Anomalies Merged", value: 106, accent: "#E62429" },
               { label: "Hand-Woven Suits", value: stats.handWoven, accent: "#FF3B3B" },
               { label: "Unique Abilities", value: stats.uniqueSkills, accent: "#E8E6E3" },
               { label: "Top Ability", value: stats.topSkill.toUpperCase(), accent: "#C1121F" },
@@ -78,11 +84,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── LEADERBOARD ──────────────────────────────────────────── */}
+      <Leaderboard members={members} />
+
       {/* ── ROSTER ───────────────────────────────────────────────── */}
-      <section id="roster" className="mx-auto max-w-6xl px-6 pt-10">
+      <section id="roster" className="mx-auto max-w-6xl px-6 pt-16">
         <div className="mb-8 flex items-end justify-between border-b border-white/10 pb-4">
           <h2 className="font-display text-4xl uppercase tracking-wide text-white sm:text-5xl">
-            The <span className="text-web-scarlet">Roster</span>
+            Top <span className="text-web-scarlet">20</span>
           </h2>
           <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/35">
             live from /spider-society
